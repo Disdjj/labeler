@@ -1,0 +1,31 @@
+name: 'AI Issue Labeler'
+description: 'Use AI to automatically label your GitHub issues.'
+author: 'Your Name'
+
+inputs:
+  github-token:
+    description: 'The GitHub token to use for API requests.'
+    required: true
+  api-key:
+    description: 'The API key for the AI service.'
+    required: true
+  base-url:
+    description: 'The base URL for the AI service.'
+    required: true
+  model:
+    description: 'The AI model to use.'
+    required: false
+    default: 'gpt-4o'
+  prompt:
+    description: 'Custom prompt for the AI. Use {issue_title}, {issue_body}, and {existing_labels} as placeholders.'
+    required: false
+    default: 'Analyze the issue title and body to suggest suitable labels. Here are the existing labels in the repository: {existing_labels}. Return a JSON array of strings. Issue Title: {issue_title} Issue Body: {issue_body}'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: 'tag'
+  color: 'blue'
+
