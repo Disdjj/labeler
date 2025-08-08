@@ -1,12 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "labeler"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI-powered GitHub issue labeler"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
     "pydantic-ai>=0.6.2",
     "pygithub>=2.7.0",
     "python-dotenv>=1.1.1",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/labeler"]
 

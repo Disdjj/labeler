@@ -1,20 +1,14 @@
-FROM python:3.13-slim-bookworm
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+FROM python:3.12-slim-bookworm
 
-# 创建应用目录
 WORKDIR /app
 
-# 先复制依赖文件
-COPY pyproject.toml uv.lock ./
+# Install uv by copying from official image
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-# 安装依赖
-RUN uv sync --locked
-
-# 复制源代码
+# Copy the entire project
 COPY . .
 
-# 创建一个入口脚本来处理不同的工作目录
-RUN echo '#!/bin/bash\ncd /github/workspace 2>/dev/null || cd /app\nexec uv run main.py "$@"' > /entrypoint.sh && \
-    chmod +x /entrypoint.sh
+# Install the package and its dependencies
+RUN uv pip install . --system
 
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["python", "-m", "labeler"]
