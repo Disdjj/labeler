@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: AI Issue Labeler
-        uses: YOUR_USERNAME/YOUR_REPONAME@v1 # Replace with your repo and a specific version
+        uses: Disdjj/labeler@v1.0.0 # Replace with your repo and a specific version
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           api-key: ${{ secrets.AI_API_KEY }}
