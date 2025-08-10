@@ -1,18 +1,21 @@
-name: AI Issue Labeler
+name: AI Issue and Discussion Labeler
 
 on:
   issues:
     types: [opened, edited, reopened]
+  discussion:
+    types: [created, edited]
 
 permissions:
   issues: write
+  discussions: write
   contents: read
 
 jobs:
   label:
     runs-on: ubuntu-latest
     steps:
-      - name: AI Issue Labeler
+      - name: AI Issue and Discussion Labeler
         uses: Disdjj/labeler@v1.0.4 # Replace with your repo and a specific version
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
